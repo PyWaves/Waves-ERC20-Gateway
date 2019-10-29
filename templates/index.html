@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ERC-20 <-> Waves Gateway</title>
+	<link href="static/bootstrap.min.css" rel="stylesheet">
+	<link rel="icon" href="static/favicon.ico" type="image/x-icon">
+	<script src="static/app.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div className="col-md-12">
+		<div className="page-header">
+		  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="navbar-nav">
+				ETH height: {{ ethHeight }}, ETH Gateway Address: {{ ethAddress }}
+				<br />
+				Waves height: {{ wavesHeight }}, Waves Gateway Address: {{ wavesAddress }}
+			  </ul>
+			</div>
+		  </nav>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h2>
+					{{chainName}} <-> Waves Gateway
+				</h2>
+				<p>
+					This is a simple gateway for ERC-20 tokens to the Waves Platform. It is based on tunnels. Users can
+					define a tunnel between a source ETH address and a target Waves address. Whenever an ERC-20 token
+					is send from the defined source ETH address to the gateway address, the corresponding amount of
+					tokens are send to the defined Waves address on the Waves Platform. It is important to notice that
+					tunnels will be removed after they are used. Therefore, if more than one transfer should be done
+					via a tunnel, this tunnel needs to be re-established!
+					<p>
+					For sending tokens from the Waves Platform to the Ethereum blockchain, just add the ETH address
+					that should receive the tokens as the description of the transfer and send the tokens to the Waves
+					address of the gateway.
+					<p>
+					<h4>DISCLAIMER: Use this gateway at your own risk!!!</h4>
+				</p>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4">
+					<form role="form">
+						<div class="form-group">
+							<label for="ethAddress">
+								ETH Address
+							</label>
+							<input type="text" class="form-control" id="ethAddress" />
+						</div>
+						<div class="form-group">
+							<label for="wavesAddress">
+								Waves Address
+							</label>
+							<input type="text" class="form-control" id="wavesAddress" />
+						</div>
+						<button onclick="establishTunnel(event)" class="btn btn-primary">
+							Establish Tunnel
+						</button>
+						<button onclick="checkETHAddress(event)" class="btn btn-secondary">
+							Check ETH Address
+						</button>
+					</form>
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

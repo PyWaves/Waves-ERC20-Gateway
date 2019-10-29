@@ -1,0 +1,26 @@
+{
+    "erc20": {
+        "name": "<name of the token>",
+        "endpoint": "<http url of your node provider | empty if you want to connect to a local node via IPC>",
+        "contract": {
+            "address": "<contract address of your token that you want to establish the gateway for>",
+            "decimals": <number of decimals of the token>
+        },
+        "fee": <the fee you want to collect on the gateway, calculated in your token, e.g., 0.1>,
+        "confirmations": <number of confirmations necessary in order to accept a transaction>,
+        "timeInBetweenChecks": <seconds in between a check for a new block>,
+        "gatewayAddress": "<ETH address of the gateway>",
+        "privateKey": "<private key to the ETH address definend above>"
+    },
+    "waves": {
+        "gatewayAddress": "<Waves address of the gateway>",
+        "gatewaySeed": "<seed of the above devined address>",
+        "fee": <the fee you want to collect on the gateway, calculated in the proxy token, e.g., 0.1>,
+        "assetId": "<the asset id of the proxy token on the Waves platform>",
+        "decimals": <number of decimals of the token>,
+        "network": "<Waves network you want to connect to (testnet|stagenent|mainnet)>",
+        "node": "<the waves node you want to connect to>",
+        "timeInBetweenChecks": <seconds in between a check for a new block>,
+        "confirmations": <number of confirmations necessary in order to accept a transaction>
+    }
+}

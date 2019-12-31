@@ -34,14 +34,16 @@ class ERC20Tunnel(object):
         result = None
         w3 = self.getWeb3Instance()
         transaction = w3.eth.getTransaction(id)
-        contract = w3.eth.contract(address=self.config['erc20']['contract']['address'], abi=EIP20_ABI)
 
         if transaction['to'] == self.config['erc20']['contract']['address'] and transaction['input'].startswith('0xa9059cbb'):
-            sender = transaction['from']
-            decodedInput = contract.decode_function_input(transaction['input'])
-            recipient = decodedInput[1]['_to']
-            amount = decodedInput[1]['_value'] / 10 ** self.config['erc20']['contract']['decimals']
-            result =  { 'sender': sender, 'function': 'transfer', 'recipient': recipient, 'amount': amount, 'token': self.config['erc20']['contract']['address'] }
+            transactionreceipt = self.w3.eth.getTransactionReceipt(id)
+            if transactionreceipt['status']:
+                contract = w3.eth.contract(address=self.config['erc20']['contract']['address'], abi=EIP20_ABI)
+                sender = transaction['from']
+                decodedInput = contract.decode_function_input(transaction['input'])
+                recipient = decodedInput[1]['_to']
+                amount = decodedInput[1]['_value'] / 10 ** self.config['erc20']['contract']['decimals']
+                result =  { 'sender': sender, 'function': 'transfer', 'recipient': recipient, 'amount': amount, 'token': self.config['erc20']['contract']['address'] }
 
         return result
 
